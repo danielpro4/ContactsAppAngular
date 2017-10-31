@@ -1,3 +1,19 @@
+.split-view {
+    & .side-view {
+        position: fixed;
+        top: 80px;
+        bottom: 0;
+        box-sizing: border-box;
+        border-right: 1px #e5e5e5 solid;
+        overflow: auto;
+        width: 420px !important;
+    }
+
+    & .main-view {
+        padding-left: 420px;
+    }
+}
+
 
 .contact-item .avatar {
     background: blueviolet;
@@ -35,8 +51,6 @@
 
 .uk-search-large .uk-search-icon,
 .uk-search-large .uk-search-input {
-    color: white;
-    font-size: 32px;
 }
 
 .uk-search-large ::-webkit-input-placeholder {
@@ -44,13 +58,19 @@
 }
 
 .uk-list {
+    border-top: solid 1px #e5e5e5;
     width: 100%;
+
+    &.contacts {
+        margin: 0;  
+    }
 }
 
 .contact-item {
-    border-radius: 7px;
     cursor: pointer;
-    
+    margin: 0 !important;
+    border-bottom: solid 1px #e5e5e5;
+
     .uk-comment-avatar {
         border-radius: 50%;
         margin: 10px 5px 0px 10px;
@@ -58,6 +78,7 @@
 
     &:hover,
     &.selected {
+        border-bottom: solid 1px #2aa0f5;
         background-color: #2aa0f5 !important;
 
         .uk-comment-title, 
@@ -79,4 +100,5 @@
 .button-create  {
     background: orangered;
     color: white;
+    height: 52px;
 }
