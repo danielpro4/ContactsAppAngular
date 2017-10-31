@@ -1,20 +1,116 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav class="uk-navbar">
+  <div class="uk-navbar-container">
+    <div class="uk-navbar">
+      <div class="uk-navbar-left">
+        <!-- Branding Image -->
+        <a class="uk-navbar-item uk-logo" href="#">
+          <span uk-icon="icon: user"></span><span> Contacts</span>
+        </a>
+      </div>
+      <div class="uk-navbar-right">
+        <div class="uk-navbar-item">
+          <div class="uk-search uk-search-large">
+            <span uk-search-icon></span>
+            <input [(ngModel)]="query" (keyup)="onSearch($event)" class="uk-search-input" type="search" placeholder="Search...">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
 
+<main class="uk-container uk-container-expand">
+  <br>
+  <button (click)="onCreate(contactForm)" class="button-create uk-button">
+    <span uk-icon="icon: plus"></span> Nuevo</button>
+  <div class="uk-grid">
+    <section class="uk-width-expand@m">
+      <div class="uk-container">
+        <div class="uk-grid uk-margin-top">
+          <div *ngIf="loading">Cargando...</div>
+
+          <ul class="uk-list uk-list-divider">
+            <li *ngFor="let contact of contacts" [class.selected]="contact === selectedContact" class="contact-item" (click)="onSelect(contact)">
+              <article class="uk-comment uk-visible-toggle">
+                <header class="uk-comment-header">
+                  <div class="uk-grid uk-grid-medium uk-flex-middle">
+                    <div class="uk-width-auto">
+                      <img class="uk-comment-avatar" src="/assets/imgs/avatar.png" width="80" height="80" alt="Avatar">
+                    </div>
+                    <div class="uk-width-expand">
+                      <h4 class="uk-comment-title uk-margin-remove">{{contact.name}}</h4>
+                      <div class="uk-comment-meta uk-margin-remove-top">
+                        <div>
+                          <span uk-icon="icon: phone"></span> {{contact.phone}}</div>
+                        <div>
+                          <span uk-icon="icon: mail"></span> {{contact.email}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </header>
+              </article>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="uk-width-expand@m">
+      <div *ngIf="selectedContact" class="uk-container uk-margin-top">
+
+        <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" class="uk-contact-form uk-form-horizontal uk-margin-large">
+          <fieldset class="uk-fieldset">
+            <legend class="uk-legend">Contact Data</legend>
+            <div class="uk-margin">
+              <label class="uk-form-label">Name:</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" name="name" [(ngModel)]="selectedContact.name" #name="ngModel" ngModel required minlength="4" placeholder="Name, e.g. Daniel"
+                  type="text" name="name">
+
+                <div [hidden]="name.valid || name.pristine" class="uk-text-danger">
+                  Name is required
+                </div>
+              </div>
+            </div>
+
+
+            <div class="uk-margin">
+              <label class="uk-form-label">Phone:</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" name="phone" [(ngModel)]="selectedContact.phone" placeholder="Phone" pattern="^\d{3}-\d{3}-\d{4}$"
+                  required #phone="ngModel" ngModel type="text">
+                <div [hidden]="phone.valid || phone.pristine" class="uk-text-danger">
+                  Name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="uk-margin">
+              <label class="uk-form-label">E-mail:</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" name="email" [(ngModel)]="selectedContact.email" placeholder="E-mail" required #email="ngModel" ngModel
+                  ngModeltype="text">
+                <div [hidden]="email.valid || email.pristine" class="uk-text-danger">
+                  Name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="uk-margin">
+              <label class="uk-form-label">Address:</label>
+              <div class="uk-form-controls">
+                <textarea class="uk-textarea" name="address" [(ngModel)]="selectedContact.address" placeholder="Address" ngModel rows="3"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <button class="uk-button uk-button-primary" [disabled]="!contactForm.form.valid">
+            <span uk-icon="icon: check"></span> Guardar
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </div>
+</main>

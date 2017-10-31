@@ -1,0 +1,82 @@
+
+.contact-item .avatar {
+    background: blueviolet;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    flex: 1 0 60px;
+    padding: 15px;
+}
+
+.uk-form-horizontal {
+    .uk-form-controls {
+        margin-left: 135px;
+    }
+
+    .uk-form-label {
+        width: 120px;
+    }
+}
+
+.uk-logo {
+    text-decoration: none;
+}
+
+.uk-logo span {
+    color: white;
+    font-size: 32px;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: linear-gradient(to left, #28a5f5, #1e87f0);
+    z-index: 1;
+    width: 100%;
+}
+
+.uk-search-large .uk-search-icon,
+.uk-search-large .uk-search-input {
+    color: white;
+    font-size: 32px;
+}
+
+.uk-search-large ::-webkit-input-placeholder {
+    color: white;
+}
+
+.uk-list {
+    width: 100%;
+}
+
+.contact-item {
+    border-radius: 7px;
+    cursor: pointer;
+    
+    .uk-comment-avatar {
+        border-radius: 50%;
+        margin: 10px 5px 0px 10px;
+    }
+
+    &:hover,
+    &.selected {
+        background-color: #2aa0f5 !important;
+
+        .uk-comment-title, 
+        .uk-comment-meta {
+            color: white;
+        }
+    }
+
+}
+
+.uk-contact-form {
+    position: relative;
+
+    button {
+        float: right
+    }
+}
+
+.button-create  {
+    background: orangered;
+    color: white;
+}
